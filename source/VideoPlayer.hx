@@ -7,7 +7,7 @@ import openfl.Assets;
 import openfl.media.Sound;
 import flixel.FlxSprite;
 import webm.*;
-import tools.Asset2File;
+import Asset2File;
 #if sys
 import webm.WebmPlayer;
 #end
