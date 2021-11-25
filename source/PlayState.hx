@@ -259,9 +259,9 @@ class PlayState extends MusicBeatState
 	var attackTxt:FlxText;
 	override public function create()
 	{
-		#if MODS_ALLOWED
-		Paths.destroyLoadedImages(resetSpriteCache);
-		#end
+		// #if MODS_ALLOWED
+		// Paths.destroyLoadedImages(resetSpriteCache);
+		// #end
 		resetSpriteCache = false;
 
 		if (FlxG.sound.music != null)
@@ -1032,12 +1032,16 @@ class PlayState extends MusicBeatState
 					if (alreadyshowed) {
 						FlxTransitionableState.skipNextTransIn = false;
 						FlxTransitionableState.skipNextTransOut = false;
-						var video:VideoHandlerMP4 = new VideoHandlerMP4();
-						video.playMP4(Paths.video('FNF-Lyc cutscene 3'));
-						video.finishCallback = function()
-						{
+						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyc cutscene 3.webm");
+						video.finishCallback = () -> {
+							remove(video);
 							LoadingState.loadAndSwitchState(new PlayState());
 						}
+						video.ownCamera();
+		                video.setGraphicSize(FlxG.width);
+		                video.updateHitbox();
+		                add(video);
+		                video.play();
 						alreadyshowed = false;
 					}
 					else {
@@ -1049,12 +1053,16 @@ class PlayState extends MusicBeatState
 					if (alreadyshowed) {
 						FlxTransitionableState.skipNextTransIn = false;
 						FlxTransitionableState.skipNextTransOut = false;
-						var video:VideoHandlerMP4 = new VideoHandlerMP4();
-						video.playMP4(Paths.video('FNF-Lyc cutscene 2'));
-						video.finishCallback = function()
-						{
+						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyc cutscene 2.webm");
+						video.finishCallback = () -> {
+							remove(video);
 							LoadingState.loadAndSwitchState(new PlayState());
 						}
+						video.ownCamera();
+		                video.setGraphicSize(FlxG.width);
+		                video.updateHitbox();
+		                add(video);
+		                video.play();
 						alreadyshowed = false;
 					}
 					else {
@@ -1066,12 +1074,16 @@ class PlayState extends MusicBeatState
 					if (alreadyshowed) {
 						FlxTransitionableState.skipNextTransIn = false;
 						FlxTransitionableState.skipNextTransOut = false;
-						var video:VideoHandlerMP4 = new VideoHandlerMP4();
-						video.playMP4(Paths.video('FNF-Lyc cutscene 1'));
-						video.finishCallback = function()
-						{
+						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyc cutscene 1.webm");
+						video.finishCallback = () -> {
+							remove(video);
 							LoadingState.loadAndSwitchState(new PlayState());
 						}
+						video.ownCamera();
+		                video.setGraphicSize(FlxG.width);
+		                video.updateHitbox();
+		                add(video);
+		                video.play();
 						alreadyshowed = false;
 					}
 					else {
@@ -1166,53 +1178,53 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
-	public function startVideo(name:String):Void {
-		#if VIDEOS_ALLOWED
-		var foundFile:Bool = false;
-		var fileName:String = #if MODS_ALLOWED Paths.modFolders('videos/' + name + '.' + Paths.VIDEO_EXT); #else ''; #end
-		#if sys
-		if(FileSystem.exists(fileName)) {
-			foundFile = true;
-		}
-		#end
+	// public function startVideo(name:String):Void {
+	// 	#if VIDEOS_ALLOWED
+	// 	var foundFile:Bool = false;
+	// 	var fileName:String = #if MODS_ALLOWED Paths.modFolders('videos/' + name + '.' + Paths.VIDEO_EXT); #else ''; #end
+	// 	#if sys
+	// 	if(FileSystem.exists(fileName)) {
+	// 		foundFile = true;
+	// 	}
+	// 	#end
 
-		if(!foundFile) {
-			fileName = Paths.video(name);
-			#if sys
-			if(FileSystem.exists(fileName)) {
-			#else
-			if(OpenFlAssets.exists(fileName)) {
-			#end
-				foundFile = true;
-			}
-		}
+	// 	if(!foundFile) {
+	// 		fileName = Paths.video(name);
+	// 		#if sys
+	// 		if(FileSystem.exists(fileName)) {
+	// 		#else
+	// 		if(OpenFlAssets.exists(fileName)) {
+	// 		#end
+	// 			foundFile = true;
+	// 		}
+	// 	}
 
-		if(foundFile) {
-			inCutscene = true;
-			var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-			bg.scrollFactor.set();
-			bg.cameras = [camHUD];
-			add(bg);
+	// 	if(foundFile) {
+	// 		inCutscene = true;
+	// 		var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+	// 		bg.scrollFactor.set();
+	// 		bg.cameras = [camHUD];
+	// 		add(bg);
 
-			(new FlxVideo(fileName)).finishCallback = function() {
-				remove(bg);
-				if(endingSong) {
-					endSong();
-				} else {
-					startCountdown();
-				}
-			}
-			return;
-		} else {
-			FlxG.log.warn('Couldnt find video file: ' + fileName);
-		}
-		#end
-		if(endingSong) {
-			endSong();
-		} else {
-			startCountdown();
-		}
-	}
+	// 		(new FlxVideo(fileName)).finishCallback = function() {
+	// 			remove(bg);
+	// 			if(endingSong) {
+	// 				endSong();
+	// 			} else {
+	// 				startCountdown();
+	// 			}
+	// 		}
+	// 		return;
+	// 	} else {
+	// 		FlxG.log.warn('Couldnt find video file: ' + fileName);
+	// 	}
+	// 	#end
+	// 	if(endingSong) {
+	// 		endSong();
+	// 	} else {
+	// 		startCountdown();
+	// 	}
+	// }
 
 	var dialogueCount:Int = 0;
 	//You don't have to add a song, just saying. You can just do "startDialogue(dialogueJson);" and it should work
@@ -3191,13 +3203,17 @@ class PlayState extends MusicBeatState
 						case 'lycanthrope':
 								FlxTransitionableState.skipNextTransIn = false;
 								FlxTransitionableState.skipNextTransOut = false;
-								var video:VideoHandlerMP4 = new VideoHandlerMP4();
-								video.playMP4(Paths.video('FNF-Lyc cutscene 4'));
-								video.finishCallback = function()
-								{
+								var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyc cutscene 4.webm");
+								video.finishCallback = () -> {
+									remove(video);
 									FlxG.sound.playMusic(Paths.music('freakyMenu'));
 									MusicBeatState.switchState(new StoryMenuState());
 								}
+								video.ownCamera();
+								video.setGraphicSize(FlxG.width);
+								video.updateHitbox();
+								add(video);
+								video.play();
 						default:
 							MusicBeatState.switchState(new StoryMenuState());
 					}

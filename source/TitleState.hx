@@ -61,30 +61,33 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-
-		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/songs")))
-			{
-				music.push(i);
-			}
-		for (i in music)
-			{
-				FlxG.sound.cache(Paths.inst(i));
-				FlxG.sound.cache(Paths.voices(i));
-			}
-		#if (polymod && !html5)
-		if (sys.FileSystem.exists('mods/')) {
-			var folders:Array<String> = [];
-			for (file in sys.FileSystem.readDirectory('mods/')) {
-				var path = haxe.io.Path.join(['mods/', file]);
-				if (sys.FileSystem.isDirectory(path)) {
-					folders.push(file);
-				}
-			}
-			if(folders.length > 0) {
-				polymod.Polymod.init({modRoot: "mods", dirs: folders});
-			}
-		}
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
 		#end
+
+		// for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/songs")))
+		// 	{
+		// 		music.push(i);
+		// 	}
+		// for (i in music)
+		// 	{
+		// 		FlxG.sound.cache(Paths.inst(i));
+		// 		FlxG.sound.cache(Paths.voices(i));
+		// 	}
+		// #if (polymod && !html5)
+		// if (sys.FileSystem.exists('mods/')) {
+		// 	var folders:Array<String> = [];
+		// 	for (file in sys.FileSystem.readDirectory('mods/')) {
+		// 		var path = haxe.io.Path.join(['mods/', file]);
+		// 		if (sys.FileSystem.isDirectory(path)) {
+		// 			folders.push(file);
+		// 		}
+		// 	}
+		// 	if(folders.length > 0) {
+		// 		polymod.Polymod.init({modRoot: "mods", dirs: folders});
+		// 	}
+		// }
+		// #end
 		
 		#if CHECK_FOR_UPDATES
 		if(!closedState) {
