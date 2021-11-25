@@ -394,7 +394,13 @@ class StoryMenuState extends MusicBeatState
 			PlayState.alreadyshowed = true;
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				LoadingState.loadAndSwitchState(new PlayState(), true);
+				if(PlayState.alreadyshowed){
+					LoadingState.loadAndSwitchState(new VideoState("assets/videos/FNF-Lyccutscene1", new PlayState()));
+					PlayState.alreadyshowed = false;
+				}
+				else {
+					LoadingState.loadAndSwitchState(new PlayState());
+				}
 				FreeplayState.destroyFreeplayVocals();
 			});
 		} else {

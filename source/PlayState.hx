@@ -1028,69 +1028,69 @@ class PlayState extends MusicBeatState
 		{
 			switch (Paths.formatToSongPath(SONG.song))
 			{
-				case 'lycanthrope':
-					if (alreadyshowed) {
-						FlxTransitionableState.skipNextTransIn = false;
-						FlxTransitionableState.skipNextTransOut = false;
-						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene3.webm");
-						video.finishCallback = () -> {
-							remove(video);
-							LoadingState.loadAndSwitchState(new PlayState());
-						}
-						video.ownCamera();
-		                video.setGraphicSize(FlxG.width);
-		                video.updateHitbox();
-		                add(video);
-		                video.play();
-						alreadyshowed = false;
-					}
-					else {
-						camHUD.visible = true;
-						camGame.visible = true;
-						startCountdown();
-					}
-				case 'rejoice':
-					if (alreadyshowed) {
-						FlxTransitionableState.skipNextTransIn = false;
-						FlxTransitionableState.skipNextTransOut = false;
-						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene2.webm");
-						video.finishCallback = () -> {
-							remove(video);
-							LoadingState.loadAndSwitchState(new PlayState());
-						}
-						video.ownCamera();
-		                video.setGraphicSize(FlxG.width);
-		                video.updateHitbox();
-		                add(video);
-		                video.play();
-						alreadyshowed = false;
-					}
-					else {
-						camHUD.visible = true;
-						camGame.visible = true;
-						startCountdown();
-					}
-				case 'before-the-storm':
-					if (alreadyshowed) {
-						FlxTransitionableState.skipNextTransIn = false;
-						FlxTransitionableState.skipNextTransOut = false;
-						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene1.webm");
-						video.finishCallback = () -> {
-							remove(video);
-							LoadingState.loadAndSwitchState(new PlayState());
-						}
-						video.ownCamera();
-		                video.setGraphicSize(FlxG.width);
-		                video.updateHitbox();
-		                add(video);
-		                video.play();
-						alreadyshowed = false;
-					}
-					else {
-						camHUD.visible = true;
-						camGame.visible = true;
-						startCountdown();
-					}
+				// case 'lycanthrope':
+				// 	if (alreadyshowed) {
+				// 		FlxTransitionableState.skipNextTransIn = false;
+				// 		FlxTransitionableState.skipNextTransOut = false;
+				// 		var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene3.webm");
+				// 		video.finishCallback = () -> {
+				// 			remove(video);
+				// 			LoadingState.loadAndSwitchState(new PlayState());
+				// 		}
+				// 		video.ownCamera();
+		        //         video.setGraphicSize(FlxG.width);
+		        //         video.updateHitbox();
+		        //         add(video);
+		        //         video.play();
+				// 		alreadyshowed = false;
+				// 	}
+				// 	else {
+				// 		camHUD.visible = true;
+				// 		camGame.visible = true;
+				// 		startCountdown();
+				// 	}
+				// case 'rejoice':
+				// 	if (alreadyshowed) {
+				// 		FlxTransitionableState.skipNextTransIn = false;
+				// 		FlxTransitionableState.skipNextTransOut = false;
+				// 		var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene2.webm");
+				// 		video.finishCallback = () -> {
+				// 			remove(video);
+				// 			LoadingState.loadAndSwitchState(new PlayState());
+				// 		}
+				// 		video.ownCamera();
+		        //         video.setGraphicSize(FlxG.width);
+		        //         video.updateHitbox();
+		        //         add(video);
+		        //         video.play();
+				// 		alreadyshowed = false;
+				// 	}
+				// 	else {
+				// 		camHUD.visible = true;
+				// 		camGame.visible = true;
+				// 		startCountdown();
+				// 	}
+				// case 'before-the-storm':
+				// 	if (alreadyshowed) {
+				// 		FlxTransitionableState.skipNextTransIn = false;
+				// 		FlxTransitionableState.skipNextTransOut = false;
+				// 		var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene1.webm");
+				// 		video.finishCallback = () -> {
+				// 			remove(video);
+				// 			LoadingState.loadAndSwitchState(new PlayState());
+				// 		}
+				// 		video.ownCamera();
+		        //         video.setGraphicSize(FlxG.width);
+		        //         video.updateHitbox();
+		        //         add(video);
+		        //         video.play();
+				// 		alreadyshowed = false;
+				// 	}
+				// 	else {
+				// 		camHUD.visible = true;
+				// 		camGame.visible = true;
+				// 		startCountdown();
+				// 	}
 				default:
 					startCountdown();
 			}
@@ -3255,7 +3255,35 @@ class PlayState extends MusicBeatState
 					} else {
 						cancelFadeTween();
 						//resetSpriteCache = true;
-						LoadingState.loadAndSwitchState(new PlayState());
+						switch(song.toLowerCase())
+						{
+							case 'before-the-storm':
+								if(alreadyshowed){
+									LoadingState.loadAndSwitchState(new VideoState("assets/videos/FNF-Lyccutscene2", new PlayState()));
+									alreadyshowed = false;
+								}
+								else {
+									LoadingState.loadAndSwitchState(new PlayState());
+								}
+							case 'rejoice':
+								if(alreadyshowed){
+									LoadingState.loadAndSwitchState(new VideoState("assets/videos/FNF-Lyccutscene3", new PlayState()));
+									alreadyshowed = false;
+								}
+								else {
+									LoadingState.loadAndSwitchState(new PlayState());
+								}
+							case 'lycanthrope':
+								if(alreadyshowed){
+									LoadingState.loadAndSwitchState(new VideoState("assets/videos/FNF-Lyccutscene4", new PlayState()));
+									alreadyshowed = false;
+								}
+								else {
+									LoadingState.loadAndSwitchState(new PlayState());
+								}
+							default:
+								LoadingState.loadAndSwitchState(new PlayState());
+						}
 					}
 				}
 			}
