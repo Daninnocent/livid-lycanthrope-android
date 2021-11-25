@@ -3303,7 +3303,7 @@ class PlayState extends MusicBeatState
 						{
 							case 'before-the-storm':
 								if(alreadyshowed){
-									LoadingState.loadAndSwitchState(new VideoState("assets/videos/FNF-Lyccutscene2", new PlayState()));
+									LoadingState.loadAndSwitchState(new VideoState("assets/videos/Fnf-Lyccutscene2", new PlayState()));
 									alreadyshowed = false;
 								}
 								else {
@@ -3311,7 +3311,7 @@ class PlayState extends MusicBeatState
 								}
 							case 'rejoice':
 								if(alreadyshowed){
-									LoadingState.loadAndSwitchState(new VideoState("assets/videos/FNF-Lyccutscene3", new PlayState()));
+									LoadingState.loadAndSwitchState(new VideoState("assets/videos/Fnf-Lyccutscene3", new PlayState()));
 									alreadyshowed = false;
 								}
 								else {
@@ -3319,7 +3319,7 @@ class PlayState extends MusicBeatState
 								}
 							case 'lycanthrope':
 								if(alreadyshowed){
-									LoadingState.loadAndSwitchState(new VideoState("assets/videos/FNF-Lyccutscene4", new PlayState()));
+									LoadingState.loadAndSwitchState(new VideoState("assets/videos/Fnf-Lyccutscene4", new PlayState()));
 									alreadyshowed = false;
 								}
 								else {

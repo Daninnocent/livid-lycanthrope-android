@@ -395,7 +395,7 @@ class StoryMenuState extends MusicBeatState
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				if(PlayState.alreadyshowed){
-					LoadingState.loadAndSwitchState(new VideoState("assets/videos/FNF-Lyccutscene1", new PlayState()));
+					LoadingState.loadAndSwitchState(new VideoState("assets/videos/Fnf-Lyccutscene1", new PlayState()));
 					PlayState.alreadyshowed = false;
 				}
 				else {
