@@ -1032,7 +1032,7 @@ class PlayState extends MusicBeatState
 					if (alreadyshowed) {
 						FlxTransitionableState.skipNextTransIn = false;
 						FlxTransitionableState.skipNextTransOut = false;
-						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyc cutscene 3.webm");
+						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene3.webm");
 						video.finishCallback = () -> {
 							remove(video);
 							LoadingState.loadAndSwitchState(new PlayState());
@@ -1053,7 +1053,7 @@ class PlayState extends MusicBeatState
 					if (alreadyshowed) {
 						FlxTransitionableState.skipNextTransIn = false;
 						FlxTransitionableState.skipNextTransOut = false;
-						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyc cutscene 2.webm");
+						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene2.webm");
 						video.finishCallback = () -> {
 							remove(video);
 							LoadingState.loadAndSwitchState(new PlayState());
@@ -1074,7 +1074,7 @@ class PlayState extends MusicBeatState
 					if (alreadyshowed) {
 						FlxTransitionableState.skipNextTransIn = false;
 						FlxTransitionableState.skipNextTransOut = false;
-						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyc cutscene 1.webm");
+						var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene1.webm");
 						video.finishCallback = () -> {
 							remove(video);
 							LoadingState.loadAndSwitchState(new PlayState());
@@ -3203,7 +3203,7 @@ class PlayState extends MusicBeatState
 						case 'lycanthrope':
 								FlxTransitionableState.skipNextTransIn = false;
 								FlxTransitionableState.skipNextTransOut = false;
-								var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyc cutscene 4.webm");
+								var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene4.webm");
 								video.finishCallback = () -> {
 									remove(video);
 									FlxG.sound.playMusic(Paths.music('freakyMenu'));
