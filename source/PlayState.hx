@@ -3200,20 +3200,20 @@ class PlayState extends MusicBeatState
 
 					switch (Paths.formatToSongPath(SONG.song))
 					{
-						case 'lycanthrope':
-								FlxTransitionableState.skipNextTransIn = false;
-								FlxTransitionableState.skipNextTransOut = false;
-								var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene4.webm");
-								video.finishCallback = () -> {
-									remove(video);
-									FlxG.sound.playMusic(Paths.music('freakyMenu'));
-									MusicBeatState.switchState(new StoryMenuState());
-								}
-								video.ownCamera();
-								video.setGraphicSize(FlxG.width);
-								video.updateHitbox();
-								add(video);
-								video.play();
+						// case 'lycanthrope':
+						// 		FlxTransitionableState.skipNextTransIn = false;
+						// 		FlxTransitionableState.skipNextTransOut = false;
+						// 		var video = new VideoPlayer(0,0, "assets/videos/FNF-Lyccutscene4.webm");
+						// 		video.finishCallback = () -> {
+						// 			remove(video);
+						// 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+						// 			MusicBeatState.switchState(new StoryMenuState());
+						// 		}
+						// 		video.ownCamera();
+						// 		video.setGraphicSize(FlxG.width);
+						// 		video.updateHitbox();
+						// 		add(video);
+						// 		video.play();
 						default:
 							MusicBeatState.switchState(new StoryMenuState());
 					}
@@ -3255,7 +3255,7 @@ class PlayState extends MusicBeatState
 					} else {
 						cancelFadeTween();
 						//resetSpriteCache = true;
-						switch(song.toLowerCase())
+						switch (Paths.formatToSongPath(SONG.song))
 						{
 							case 'before-the-storm':
 								if(alreadyshowed){
