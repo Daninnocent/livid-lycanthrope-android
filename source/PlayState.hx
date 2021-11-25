@@ -49,6 +49,7 @@ import Achievements;
 import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
+import ui.Mobilecontrols;
 
 #if sys
 import sys.FileSystem;
@@ -172,6 +173,7 @@ class PlayState extends MusicBeatState
 
 	var botplaySine:Float = 0;
 	var botplayTxt:FlxText;
+	var daninnocentTxt:FlxText;
 
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
@@ -257,6 +259,11 @@ class PlayState extends MusicBeatState
 	var usingAttackBar:Bool = false;
 	var attackLevel:Float = 0;
 	var attackTxt:FlxText;
+	
+	#if mobileC
+	var mcontrols:Mobilecontrols; 
+	#end
+	
 	override public function create()
 	{
 		// #if MODS_ALLOWED
@@ -983,6 +990,12 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 78;
 		}
+		
+		daninnocentTxt = new FlxText(876, 648, 348);
+    daninnocentTxt.text = "PORTED BY DANINNOCENT";
+    daninnocentTxt.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+    daninnocentTxt.scrollFactor.set();
+    add(daninnocentTxt);
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -997,6 +1010,30 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		daninnocentTxt.cameras = [camHUD];
+		
+  	#if mobileC
+		mcontrols = new Mobilecontrols();
+		switch (mcontrols.mode)
+		{
+			case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
+				controls.setVirtualPad(mcontrols._virtualPad, FULL, NONE);
+			case HITBOX:
+				controls.setHitBox(mcontrols._hitbox);
+			default:
+		}
+		trackedinputs = controls.trackedinputs;
+		controls.trackedinputs = [];
+
+		var camcontrol = new FlxCamera();
+		FlxG.cameras.add(camcontrol);
+		camcontrol.bgColor.alpha = 0;
+		mcontrols.cameras = [camcontrol];
+
+		mcontrols.visible = false;
+
+		add(mcontrols);
+	  #end
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -1351,6 +1388,10 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown():Void
 	{
+	 	#if mobileC
+		mcontrols.visible = true;
+		#end
+		
 		if(startedCountdown) {
 			callOnLuas('onStartCountdown', []);
 			return;
@@ -3099,6 +3140,9 @@ class PlayState extends MusicBeatState
 	var transitioning = false;
 	public function endSong():Void
 	{
+	 	#if mobileC
+		mcontrols.visible = false;
+		#end
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
