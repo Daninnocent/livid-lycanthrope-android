@@ -207,7 +207,7 @@ class CreditsState extends MusicBeatState
 				}
 			});
 		#if mobileC
-		addVirtualPad(FULL, A_B);
+		addVirtualPad(LEFT_RIGHT, A_B);
 		#end
 
 		super.create();
