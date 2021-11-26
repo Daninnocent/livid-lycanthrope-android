@@ -1,9 +1,10 @@
 package;
 
+import flixel.FlxCamera;
+import Achievements;
 import flixel.text.FlxText;
 import flixel.FlxState;
 import flixel.FlxG;
-import flixel.FlxSubState;
 
 import extension.webview.WebView;
 
@@ -17,18 +18,27 @@ class VideoState extends MusicBeatState
 
 	var text:FlxText;
 
+	private var camAchievement:FlxCamera;
+
+	//var firsttimeeaster:Bool = true;
+	//Solucao burra
+
 	public function new(source:String, toTrans:FlxState)
 	{
 		super();
+
+		camAchievement = new FlxCamera();
+		camAchievement.bgColor.alpha = 0;
+	
+		FlxG.cameras.add(camAchievement);
 
 		text = new FlxText(0, 0, 0, "tap to continue", 48);
 		text.screenCenter();
 		text.alpha = 0;
 		add(text);
 
-		nextState = toTrans;
 
-		//FlxG.autoPause = false;
+		nextState = toTrans;
 
 		WebView.onClose=onClose;
 		WebView.onURLChanging=onURLChanging;
@@ -39,22 +49,18 @@ class VideoState extends MusicBeatState
 	public override function update(dt:Float) {
 		for (touch in FlxG.touches.list)
 			if (touch.justReleased)
-				onClose();
+				onClose(); //hmmmm maybe
 
 		super.update(dt);	
 	}
 
 	function onClose(){// not working
 		text.alpha = 0;
-		//FlxG.autoPause = true;
-		trace('close!');
-		trace(nextState);
-		FlxG.switchState(nextState);
+		MusicBeatState.switchState(nextState);
 	}
 
 	function onURLChanging(url:String) {
 		text.alpha = 1;
-		if (url == 'http://exitme/') onClose(); // drity hack lol
-		trace("WebView is about to open: "+url);
+		if (url == 'http://exitme(.*)') onClose(); // drity hack lol
 	}
 }
